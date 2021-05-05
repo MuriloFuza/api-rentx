@@ -5,11 +5,11 @@ services:
     image: postgres
     container_name: database_ignite
     ports: 
-      - 5432:5432 
+      - 65432:5432 
     restart: always
     environment: 
       - POSTGRES_USER=docker
-      - POSTGRES_PASSWORD=ignite
+      - POSTGRES_PASSWORD=momu1303
       - POSTGRES_DB=rentx
     volumes: 
       - pgdata:/data/postgres
