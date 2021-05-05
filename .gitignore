@@ -1,0 +1,12 @@
+node_modules
+AuxArchive
+AuxImages
+.env
+coverage
+.vscode
+tmp/*
+!tmp/.getkeep
+dist/
+CODE.md
+MULTER.md
+ormconfig.json

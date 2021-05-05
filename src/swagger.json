@@ -1,0 +1,348 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "RentaX Documentation",
+    "description": "This is an API Rent",
+    "version": "1.0.0",
+    "contact": {
+      "email": "muriloacademix@gmail.com"
+    }
+  },
+  "paths":{
+
+    "/categories": {
+      "post": {
+        "tags": [
+          "Category"
+        ],
+        "summary": "Create a category",
+        "description": "Create a new category",
+        "security": [
+          {"bearerAuth": []}
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref":"#/definitions/Category"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Created"
+          },
+          "500": {
+            "description": "Category already exists"
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "Category"
+        ],
+        "summary": "List all categories",
+        "description": "List all categories",
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "name": {
+                        "type": "string"
+                      },
+                      "description": {
+                        "type": "string"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/categories/import":{
+      "post":{
+        "tags":["Category"],
+        "summary":"Upload a new Category file",
+        "description": "Upload file",
+        "security": [
+          {"bearerAuth": []}
+        ],
+        "requestBody":{
+          "content":{
+            "multipart/form-data":{
+              "schema":{
+                "type":"object",
+                "properties":{
+                  "file":{
+                    "type":"string",
+                    "format":"binary"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses":{
+          "201":{
+            "description": "Created"
+          }
+        }
+      }
+    },
+    "/specifications": {
+      "post": {
+        "tags": [
+          "Specification"
+        ],
+        "summary": "Create a specification",
+        "description": "Create a new specification",
+        "security": [
+          {"bearerAuth": []}
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+               "$ref":"#/definitions/Specification"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Created"
+          },
+          "500": {
+            "description": "Specification already exists"
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "Specification"
+        ],
+        "summary": "List all specifications",
+        "description": "List all specifications",
+        "responses": {
+          "200": {
+            "description": "Sucess",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "name": {
+                        "type": "string"
+                      },
+                      "description": {
+                        "type": "string"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/sessions":{
+      "post":{
+        "tags":["Sessions"],
+        "summary": "Authentication user",
+        "description": "authentication user",
+        "requestBody":{
+          "content":{
+            "application/json":{
+              "schema":{
+                "type":"object",
+                "properties":{
+                  "email": {
+                    "type":"string"
+                  },
+                  "password":{
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses":{
+          "200":{
+            "description":"Success"
+          },
+          "400":{
+            "description":"Email or password incorrect!"
+          }
+        }
+      }
+    },
+    "/cars":{
+      "post": {
+          "tags": [
+            "Cars"
+          ],
+          "summary": "Create a car",
+          "description": "Create a new car",
+          "security": [
+            {"bearerAuth": []}
+          ],
+          "requestBody":{
+            "content":{
+              "application/json":{
+                "schema":{
+                  "$ref":"#/definitions/Car"
+                }
+              }
+            }
+          },
+          "responses":{
+            "201":{
+              "description":"Created"
+            },
+            "400":{
+              "description":"Car already exists"
+            }
+          }
+      }
+    },
+    "/cars/images/{id}":{
+      "post":{
+        "tags":[
+          "Cars"
+        ],
+        "summary": "Upload Images",
+        "description": "Upload Images",
+        "security": [
+          {"bearerAuth": []}
+        ],
+        "parameters":[
+          {
+            "name": "id",
+            "in": "path",
+            "description":"Car id",
+            "required": true,
+            "schema":{
+              "type":"string"
+            }
+          }
+        ],
+        "requestBody":{
+           "content":{
+             "multipart/form-data":{
+               "schema":{
+                 "type":"object",
+                 "properties":{
+                   "images":{
+                     "type":"array",
+                     "items": {
+                       "type":"string",
+                       "format":"binary"
+                     }
+                   }
+                 }
+               }
+             }
+           }
+        }, 
+        "responses":{
+          "201":{
+            "description":"Upload success!"
+          }
+        }
+      }
+    }
+  },
+  "definitions":{
+
+    "Category":{
+      "type":"object",
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        }
+      },
+      "example": {
+        "name": "Category name sample",
+        "description": "Category description sample"
+      }
+    },
+
+    "Specification":{
+      "type":"object",
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        }
+      },
+      "example": {
+        "name": "Specification name sample",
+        "description": "Specification description sample"
+      }
+    },
+
+    "Car":{
+      "type":"object",
+      "properties":{
+        "name":{
+          "type":"string"
+        },
+        "description":{
+          "type":"string"
+        },
+        "daily_rate":{
+          "type": "number"
+        },
+        "license_plate":{
+          "type":"string"
+        },
+        "fine_amount":{
+          "type": "number"
+        },
+        "brand":{
+          "type":"string"
+        },
+        "category_id":{
+          "type":"string"
+        }
+      },
+      "example":{
+        "name": "Name Car",
+        "description": "Description Car",
+        "daily_rate": "100",
+        "license_plate": "ABC-1234",
+        "fine_amount": "60",
+        "brand": "Brand",
+        "category_id": "category_id"
+      }
+    }
+  },
+  "components":{
+    "securitySchemes" : {
+      "bearerAuth": {
+        "type": "http",
+        "scheme":"bearer",
+        "bearerFormat":"JWT"
+      }
+    }
+  }
+}
