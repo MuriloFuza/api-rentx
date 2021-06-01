@@ -41,7 +41,7 @@ jobs:
           port: ${{ secrets.SSH_PORT }}
           key: ${{ secrets.SSH_KEY }}
           source: "., !node_modules"
-          target: "~/app/api-rentx"
+          target: "~/app/api"
           
       - name: Update API
         uses: appleboy/ssh-action@master
